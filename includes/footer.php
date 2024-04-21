@@ -33,11 +33,11 @@
                 </div>
         </div>
     </div>
-        <div class="row" style="text-align: center;"> 
-          <div class="col-lg-12 col-sm-12 col-xs-12">
-              <p class="copyright">2023 SEI - Carcare System. All rights reserved</p>
-          </div>             
-      </div>
+    <div class="row" style="text-align: center;">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <p class="copyright">&copy; <?php echo date("Y"); ?> SEI - Carcare System. All rights reserved.</p>
+        </div>
     </div>
+</div>
 </div>
 </section>
