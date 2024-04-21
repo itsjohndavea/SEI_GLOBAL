@@ -19,20 +19,102 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <style>
-        .table{
-            width:80%;
-       
+      .container {
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
         }
-        @media (max-width: 990px) {
-    .logo{
-        width:210px;        
-        
-    }
-    }
-    .custom-menu{
-    min-width:10px;
-   
-    }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .search-bar {
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        #search-input {
+            display: block;
+            margin: 0;
+            color: inherit;
+            width: 95%;
+            font-size: 1rem;
+            font-weight: inherit;
+            border: none;
+            border-radius: 0.4rem;
+            padding: 1px;
+        }
+
+        .table-container {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 40px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .branch-text {
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                margin-top: 50px;
+                overflow: hidden;
+            }
+
+            .table-container {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            td {
+                padding: 20px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:hover {
+                background-color: #f5f5f5;
+                cursor: pointer;
+            }
+
+            iframe {
+                width: 100%;
+                height: 200px;
+                border: none;
+            }
+
+}
 
         
     </style>
@@ -128,65 +210,24 @@
 </header>
 <section id="map">
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12 text-center pb-2">
-        <div id="map"><img src="../img/map_global.PNG" width="90%" height="500px" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></img></div>
-           </div>
-    </div>
-</div> 
-</section>
-<section id="table-distributor">
-<center><div class="container table-responsive w-100">
-<div class="row">
-<div class="col-sm-12">
-    <div class="col-sm-9">
-    <input type="text" class="form-control float-end" id="search" placeholder="Search branch name..." style="width: 25%;">
-<br>
-<table class="table table-hover border-0">
-    <thead>
-    <th class="text-uppercase"><?= __('Branch')?></th>
-    <th class="text-uppercase"><?= __('Location')?></th>
-    <th class="text-uppercase"><?= __('Contact')?></th>
-    </thead>
-    <tbody>
-    <tr onclick="changeCountry('SEI JAPAN')">
-        <td >SEI JAPAN - Main</a></td>
-        <td>6-9 Sanwachyou Chuo-ku Niigata City Japan</td>
-        <td>
-            Phone number: +81(0)252418200<br>
-            Contact person: Mori <br>
-            Email: sei.informationph@gmail.com</td>
-       </tr>
-    <tr onclick="changeCountry('SEI PHILIPPINES')">
-        <td >SEI PHILIPPINES</td>
-        <td> 175 Mayon Street corner Dapitan, Brgy. Sta. Teresita, Quezon City 1101</td>
-        <td>
-            Phone number: +639603463602 <br>
-            Shop Name: store.seiph <br>
-            Email: store.seiph@gmail.com</td>
-       </tr>
-       <tr onclick="changeCountry('SEI THAILAND')">
-        <td>SEI THAILAND</td>
-        <td>Pruksa Village B
-            Moo 4 Khlong Sam Subdistrict
-            Khlong Luang District, Pathum Thani Province 12120</td>
-        <td>
-            Phone number: +63909611874<br>
-            Email: sei.informationph@gmail.com<br>
-            </td>
-         </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-</div>
-</div>
-</div>
+        <iframe id="map-iframe" src></iframe>
+        <div class="search-bar">
+            <input type="text" id="search-input"
+                placeholder="Search for branch">
+        </div>
+        <div class="table-container">
+            <table id="shop-table">
+                <tbody>
+                </tbody>
+                 </table> 
+                </div>
+            </div> 
+            </div>
+        </div>
 </center>
 </section>
 <?php include("includes/footer.php");?>
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
    <script src="../lib/wow/wow.min.js"></script>
@@ -197,42 +238,7 @@
    <script src="../lib/tempusdominus/js/moment.min.js"></script>
    <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
    <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-   
    <script src="../js/main.js"></script>
-    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
-    <script>
-        const searchInput = document.getElementById("search");
-        const rows = document.querySelectorAll("tbody tr");
-        console.log(rows);
-        searchInput.addEventListener("keyup", function (event) {
-          const q = event.target.value.toLowerCase();
-          rows.forEach((row) => {
-            row.querySelector("td").textContent.toLowerCase().startsWith(q)
-              ? (row.style.display = "table-row")
-              : (row.style.display = "none");
-          });
-        });
-      </script>
-    <script>
-            function changeCountry(country){
-        
-                var map = document.getElementById("map");
-
-                switch(country) {
-                case "SEI JAPAN":
-                map.innerHTML = '<div class="container"><div class="row"><div class="col-sm-12 text-center pb-2"><div id="map"><img src="../img/map_japan.PNG" width="90%" height="500px" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></img></div></div></div></div> ';
-                break;
-                case "SEI PHILIPPINES":
-                map.innerHTML = '<div class="container"><div class="row"><div class="col-sm-12 text-center pb-2"><div id="map"><img src="../img/map_ph.PNG" width="90%" height="500px" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></img></div></div></div></div> ';
-                break;
-                case "SEI THAILAND":
-                map.innerHTML = '<div class="container"><div class="row"><div class="col-sm-12 text-center pb-2"><div id="map"><img src="../img/map_th.PNG" width="90%" height="500px" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></img></div></div></div></div> ';
-                break;
-                default:
-                    alert("NO COUNTRY");
-            }
-        }
-    </script>
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
 </body>
 </html>
